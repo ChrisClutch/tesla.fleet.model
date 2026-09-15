@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clutch Cybercab — A robotaxi fleet, built in Oregon</title>
+<meta name="description" content="Clutch is reserving 30 Tesla Cybercabs and building the depot to run them. See what one car earns, and get in line as an investor, rider, or property partner.">
+<meta property="og:title" content="Clutch Cybercab — 30 cars, one depot, real cash flow">
+<meta property="og:description" content="Move the sliders. See what a Cybercab fleet earns. Reserve your seat.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231B1F24'/%3E%3Ccircle cx='16' cy='16' r='8' fill='%23C9A24A'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+:root{
+  --paper:#F7F5F0; --paper2:#EDE9E0; --ink:#1B1F24; --ink2:#4A5260; --ink3:#8A919C; --line:#D9D4C8;
+  --gold:#B8892B; --gold-ink:#7A5A16; --gold-soft:#F3E7CB; --good:#2F7D4F; --bad:#B23A32;
+}
+@media (prefers-color-scheme:dark){:root{
+  --paper:#15181D; --paper2:#1E232A; --ink:#F1EEE7; --ink2:#B9BEC6; --ink3:#7E8590; --line:#2E343D;
+  --gold:#D9A946; --gold-ink:#E8C36E; --gold-soft:#3A2F17; --good:#5FC287; --bad:#EF7D74;
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Sans 3",system-ui,sans-serif;font-size:17px;line-height:1.55}
+h1,h2,h3{font-family:"Archivo",system-ui,sans-serif;line-height:1.05;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1{font-size:clamp(40px,7vw,80px);font-weight:800}
+h2{font-size:clamp(28px,4vw,42px);font-weight:700}
+h3{font-size:20px;font-weight:700}
+p{margin:0}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.wrap{max-width:1080px;margin:0 auto;padding-inline:20px}
+.eyebrow{font-family:"Archivo",sans-serif;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-ink)}
+section{padding-block:72px}
+@media(max-width:640px){section{padding-block:48px}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+.logo{display:flex;align-items:center;gap:10px;font-family:"Archivo",sans-serif;font-weight:800;font-size:18px;text-decoration:none;letter-spacing:-.01em}
+.logo i{width:22px;height:22px;border-radius:50%;background:var(--gold);display:inline-block;box-shadow:inset 0 0 0 6px var(--ink)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0}
+nav ul a{text-decoration:none;font-weight:600;font-size:15px;color:var(--ink2)}
+nav ul a:hover{color:var(--ink)}
+@media(max-width:700px){nav ul{display:none}}
+.btn{display:inline-block;font-family:"Archivo",sans-serif;font-weight:700;font-size:15px;padding:12px 20px;border-radius:6px;text-decoration:none;border:2px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer;transition:transform .12s}
+.btn:hover{transform:translateY(-1px)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1B1F24}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* hero */
+.hero{padding-block:72px 40px}
+.hero .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+@media(max-width:860px){.hero .grid{grid-template-columns:1fr}}
+.hero p.lead{font-size:20px;color:var(--ink2);max-width:52ch;margin-top:18px}
+.hero .cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.hero .facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:32px;padding-top:20px;border-top:1px solid var(--line)}
+.hero .facts div b{display:block;font-family:"Archivo",sans-serif;font-size:26px;font-weight:800}
+.hero .facts div span{font-size:14px;color:var(--ink3)}
+
+/* car illustration */
+.car{width:100%;max-width:520px;margin-inline:auto;display:block}
+
+/* calculator */
+.calc{background:var(--ink);color:var(--paper);border-radius:14px;padding:28px;box-shadow:0 20px 50px rgba(0,0,0,.18)}
+.calc .eyebrow{color:var(--gold)}
+.calc h2{color:#fff;margin-top:6px}
+.calc .body{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:22px}
+@media(max-width:760px){.calc .body{grid-template-columns:1fr}}
+.slider{margin-bottom:18px}
+.slider .row{display:flex;justify-content:space-between;align-items:baseline;font-size:15px;color:#CFD3D9}
+.slider .row output{font-family:"JetBrains Mono",monospace;font-weight:500;color:#fff;font-size:17px}
+.slider input{width:100%;accent-color:var(--gold);margin-top:6px;height:28px}
+.out{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.out .tile{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:8px;padding:14px}
+.out .tile.big{grid-column:1/-1;background:var(--gold);color:#1B1F24;border-color:var(--gold)}
+.out .l{font-size:12px;letter-spacing:.1em;text-transform:uppercase;opacity:.8;font-weight:600}
+.out .v{font-family:"Archivo",sans-serif;font-size:32px;font-weight:800;line-height:1.1;margin-top:4px;font-variant-numeric:tabular-nums}
+.out .tile.big .v{font-size:44px}
+.out .s{font-size:13px;opacity:.75;margin-top:2px}
+.calc .foot{margin-top:16px;font-size:13px;color:#9AA1AB;max-width:70ch}
+.bar{height:8px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden;margin-top:10px}
+.bar i{display:block;height:100%;background:var(--gold);width:0;transition:width .25s}
+
+/* how */
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}
+.step{border-top:3px solid var(--gold);padding-top:16px}
+.step b{font-family:"Archivo",sans-serif;font-size:13px;letter-spacing:.1em;color:var(--gold-ink)}
+.step h3{margin:6px 0 8px}
+.step p{color:var(--ink2);font-size:16px}
+
+/* why clutch */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+.levers{display:grid;gap:10px;margin-top:20px}
+.lever{display:grid;grid-template-columns:1fr auto;gap:8px 14px;align-items:center;background:var(--paper2);border-radius:8px;padding:12px 14px}
+.lever span{font-size:15px;color:var(--ink2)}
+.lever b{font-family:"JetBrains Mono",monospace;font-weight:500;font-size:15px}
+.lever .track{grid-column:1/-1;height:6px;border-radius:3px;background:var(--line);position:relative}
+.lever .track i{position:absolute;left:0;top:0;height:100%;border-radius:3px;background:var(--gold)}
+.lever .track em{position:absolute;top:-4px;width:14px;height:14px;border-radius:50%;background:var(--ink);transform:translateX(-50%)}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden;margin-top:14px}
+.toggle button{font:600 14px "Source Sans 3",sans-serif;background:transparent;color:var(--ink2);border:0;padding:8px 14px;cursor:pointer}
+.toggle button.on{background:var(--ink);color:var(--paper)}
+
+/* status */
+.status{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:28px}
+.st{background:var(--paper2);border-radius:8px;padding:16px}
+.st .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;vertical-align:middle}
+.st .dot.g{background:var(--good)}.st .dot.y{background:var(--gold)}.st .dot.r{background:var(--bad)}
+.st b{font-family:"Archivo",sans-serif;font-size:16px}
+.st p{font-size:14px;color:var(--ink2);margin-top:6px}
+
+/* form */
+.reserve{background:var(--paper2)}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px;max-width:720px}
+@media(max-width:600px){.form{grid-template-columns:1fr}}
+.form label{display:grid;gap:6px;font-size:14px;font-weight:600;color:var(--ink2)}
+.form input,.form select,.form textarea{font:400 16px "Source Sans 3",sans-serif;padding:11px 12px;border:1px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);width:100%}
+.form input:focus,.form select:focus,.form textarea:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+.form .full{grid-column:1/-1}
+.roles{display:flex;gap:8px;flex-wrap:wrap;grid-column:1/-1}
+.roles label{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:999px;padding:8px 14px;cursor:pointer;font-weight:600;color:var(--ink2)}
+.roles label:has(input:checked){background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.roles input{appearance:none;width:0;height:0;margin:0}
+.msg{grid-column:1/-1;font-size:15px;color:var(--good);display:none}
+.form .fine{grid-column:1/-1;font-size:13px;color:var(--ink3)}
+
+/* faq */
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:"Archivo",sans-serif;font-weight:700;font-size:18px;list-style:none;display:flex;justify-content:space-between;gap:12px}
+summary::after{content:"+";color:var(--gold);font-size:22px;flex:none}
+details[open] summary::after{content:"–"}
+details p{margin-top:10px;color:var(--ink2);max-width:70ch}
+
+footer{border-top:1px solid var(--line);padding-block:32px;font-size:14px;color:var(--ink3)}
+footer .wrap{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer a{color:var(--ink2);text-decoration:none;margin-right:16px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="logo" href="#top"><i></i>Clutch Cybercab</a>
+  <ul><li><a href="#calc">Calculator</a></li><li><a href="#how">How it works</a></li><li><a href="#why">Why Clutch</a></li><li><a href="#faq">FAQ</a></li></ul>
+  <a class="btn gold" href="#reserve">Reserve a seat</a>
+</div></nav>
+
+<section class="hero" id="top"><div class="wrap">
+  <div class="grid">
+    <div>
+      <div class="eyebrow">Salem, Oregon · Founded by a 25-year builder</div>
+      <h1 style="margin-top:12px">30 robotaxis.<br>One depot.<br>Real cash flow.</h1>
+      <p class="lead">Clutch is reserving a fleet of Tesla Cybercabs and building the charging depot to run them. We're opening the door to investors, riders, and property owners who want in early.</p>
+      <div class="cta"><a class="btn gold" href="#reserve">Get in line</a><a class="btn ghost" href="#calc">Run the numbers</a></div>
+      <div class="facts">
+        <div><b class="mono">$3 + $1.40/mi</b><span>Austin robotaxi fare today</span></div>
+        <div><b class="mono">~$80k</b><span>gross fares per car per year</span></div>
+        <div><b class="mono">2 seats</b><span>no steering wheel, no pedals</span></div>
+      </div>
+    </div>
+    <svg class="car" viewBox="0 0 520 300" role="img" aria-label="Stylized two-seat robotaxi">
+      <defs><linearGradient id="g" x1="0" x2="1"><stop offset="0" stop-color="#E0BF63"/><stop offset="1" stop-color="#A8781F"/></linearGradient></defs>
+      <ellipse cx="260" cy="262" rx="220" ry="14" fill="#000" opacity=".12"/>
+      <path d="M70 200 Q60 150 120 130 L180 92 Q260 60 340 92 L410 130 Q470 150 455 200 Q450 215 430 215 L95 215 Q72 215 70 200Z" fill="url(#g)"/>
+      <path d="M190 100 Q260 72 330 100 L372 128 L150 128Z" fill="#1B1F24" opacity=".85"/>
+      <path d="M150 128 L372 128 L392 140 L130 140Z" fill="#1B1F24" opacity=".55"/>
+      <rect x="86" y="180" width="350" height="8" rx="4" fill="#1B1F24" opacity=".25"/>
+      <circle cx="140" cy="215" r="34" fill="#1B1F24"/><circle cx="140" cy="215" r="16" fill="#C9A24A"/>
+      <circle cx="380" cy="215" r="34" fill="#1B1F24"/><circle cx="380" cy="215" r="16" fill="#C9A24A"/>
+      <rect x="68" y="190" width="40" height="6" rx="3" fill="#fff" opacity=".8"/>
+      <rect x="412" y="190" width="40" height="6" rx="3" fill="#E1483A" opacity=".9"/>
+      <g id="pulse"><circle cx="260" cy="90" r="4" fill="#fff"><animate attributeName="r" values="4;9;4" dur="2.4s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0;1" dur="2.4s" repeatCount="indefinite"/></circle></g>
+    </svg>
+  </div>
+</div></section>
+
+<section id="calc"><div class="wrap">
+  <div class="calc">
+    <div class="eyebrow">Interactive</div>
+    <h2>What does a Cybercab fleet earn?</h2>
+    <div class="body">
+      <div>
+        <div class="slider"><div class="row"><label for="cars">Cars in the fleet</label><output id="cars_o">30</output></div><input type="range" id="cars" min="1" max="100" value="30"></div>
+        <div class="slider"><div class="row"><label for="util">Hours in service per day</label><output id="util_o">7.2 h</output></div><input type="range" id="util" min="3" max="16" step="0.2" value="7.2"></div>
+        <div class="slider"><div class="row"><label for="fare">Fare per mile</label><output id="fare_o">$1.40</output></div><input type="range" id="fare" min="0.5" max="2.5" step="0.05" value="1.40"></div>
+        <div class="slider"><div class="row"><label for="take">Tesla's share of fares</label><output id="take_o">35%</output></div><input type="range" id="take" min="15" max="60" step="1" value="35"></div>
+        <div class="slider"><div class="row"><label for="depot">Own the depot &amp; chargers?</label><output id="depot_o">No — rent parking, Supercharge</output></div><input type="range" id="depot" min="0" max="1" step="1" value="0"></div>
+      </div>
+      <div>
+        <div class="out">
+          <div class="tile big"><div class="l">Fleet cash flow per year</div><div class="v mono" id="o_fleet">$450k</div><div class="s">after all costs and vehicle loans</div><div class="bar"><i id="o_bar"></i></div></div>
+          <div class="tile"><div class="l">Per car</div><div class="v mono" id="o_car">$21k</div><div class="s">cash per year</div></div>
+          <div class="tile"><div class="l">Equity needed</div><div class="v mono" id="o_eq">$403k</div><div class="s">down payments + depot</div></div>
+          <div class="tile"><div class="l">Gross fares</div><div class="v mono" id="o_rev">$2.4M</div><div class="s">per year, whole fleet</div></div>
+          <div class="tile"><div class="l">Break-even fare</div><div class="v mono" id="o_be">$0.82</div><div class="s">per mile, at these hours</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="foot">Base case follows the Brilliant Advice model: 5-mile trips, 25 mph, 40% empty miles, $3 base fare, $30,000 car financed 83% at 7.5% over 5 years, $6,000/yr parking and $0.35/kWh Supercharging unless you own the depot. Estimates, not offers — Tesla hasn't published fleet pricing or its take rate.</p>
+  </div>
+</div></section>
+
+<section id="how"><div class="wrap">
+  <div class="eyebrow">How it works</div>
+  <h2 style="margin-top:8px">A fleet is a machine that turns parking spaces into income.</h2>
+  <div class="steps">
+    <div class="step"><b>STEP 1</b><h3>Reserve the cars</h3><p>Tesla opened a fleet-purchase and mobility-hub interest form on September 3, 2026. Clutch is applying for 30 Cybercabs and for hub partnership, in tranches of 10.</p></div>
+    <div class="step"><b>STEP 2</b><h3>Build the depot</h3><p>Fenced lot, DC fast chargers, cleaning bay, cameras. Clutch Industries builds it. Owning the depot cuts the two biggest costs — parking and charging — by more than half.</p></div>
+    <div class="step"><b>STEP 3</b><h3>Put them on the network</h3><p>Cars run on Tesla's robotaxi app. Tesla dispatches, collects fares and takes its share; the fleet keeps the rest. Two local staff keep 30 cars clean, charged and rolling.</p></div>
+  </div>
+</div></section>
+
+<section id="why" style="background:var(--paper2)"><div class="wrap">
+  <div class="split">
+    <div>
+      <div class="eyebrow">Why Clutch</div>
+      <h2 style="margin-top:8px">The cost levers belong to whoever owns the ground.</h2>
+      <p style="margin-top:16px;color:var(--ink2)">Clutch Industries has developed and built in the Willamette Valley for 25 years, holds Oregon CCB and Arizona ROC licenses, and manages over a million square feet across 26 properties. We don't need to rent a lot or buy electricity at retail. That's the whole edge.</p>
+      <div class="toggle" role="group" aria-label="Cost scenario"><button type="button" class="on" id="t-rent">Rented lot</button><button type="button" id="t-own">Clutch depot</button></div>
+    </div>
+    <div class="levers" id="levers"></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <div class="eyebrow">Where things stand · September 2026</div>
+  <h2 style="margin-top:8px">Honest status, not hype.</h2>
+  <div class="status">
+    <div class="st"><b><span class="dot g"></span>Cybercab is real</b><p>In production at Giga Texas since February; carrying paying riders in Austin since September 4.</p></div>
+    <div class="st"><b><span class="dot g"></span>Tesla wants fleet partners</b><p>Interest form live for fleet purchasing and mobility hubs. No pricing or allocation published yet.</p></div>
+    <div class="st"><b><span class="dot y"></span>Price and take rate: TBD</b><p>"Under $30,000" is Musk's target, not a list price. The 35% share is our assumption.</p></div>
+    <div class="st"><b><span class="dot r"></span>Oregon isn't legal yet</b><p>State law still requires a human driver; HB 4085 died in March. First cars run in Texas, Florida or Arizona. We're working on the 2027 session.</p></div>
+  </div>
+</div></section>
+
+<section class="reserve" id="reserve"><div class="wrap">
+  <div class="eyebrow">Reserve a seat</div>
+  <h2 style="margin-top:8px">Tell us how you want in.</h2>
+  <p style="margin-top:12px;color:var(--ink2);max-width:60ch">No money changes hands here. This is a waitlist: we'll share the fleet agreement terms, the depot plan and the model the moment Tesla confirms pricing.</p>
+  <form class="form" id="form" novalidate>
+    <div class="roles">
+      <label><input type="checkbox" name="role" value="investor" checked>Investor</label>
+      <label><input type="checkbox" name="role" value="property">Property / land owner</label>
+      <label><input type="checkbox" name="role" value="rider">Rider</label>
+      <label><input type="checkbox" name="role" value="operator">Fleet ops job</label>
+    </div>
+    <label>Name<input name="name" required autocomplete="name"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email"></label>
+    <label>City<input name="city" placeholder="Salem, Phoenix, Austin…"></label>
+    <label>Interest level<select name="amount"><option>Just curious</option><option>1–5 cars ($5k–$25k)</option><option>6–15 cars ($30k–$75k)</option><option>Whole tranche (10+)</option><option>I have a lot / building</option></select></label>
+    <label class="full">Anything else<textarea name="note" rows="3"></textarea></label>
+    <p class="fine">By submitting you agree to be contacted about Clutch Cybercab. This isn't a securities offering; any investment will be documented separately with proper disclosures.</p>
+    <div class="full"><button class="btn gold" type="submit">Put me on the list</button></div>
+    <p class="msg" id="msg">Thanks — you're on the list. We'll be in touch.</p>
+  </form>
+</div></section>
+
+<section id="faq"><div class="wrap">
+  <div class="eyebrow">FAQ</div>
+  <h2 style="margin-top:8px;margin-bottom:24px">Straight answers.</h2>
+  <details open><summary>Can I actually buy a Cybercab?</summary><p>Not at a dealership. Tesla is taking interest from businesses that want to buy fleets and from partners who can provide hubs and infrastructure. Clutch is applying as both. Individual retail sales have been promised but no date or price is set.</p></details>
+  <details><summary>Why not run the cars in Salem?</summary><p>Oregon still requires a licensed human operator in the vehicle. A bill to allow driverless commercial service died in committee in March 2026. The first 30 cars will run in a Tesla network market — Texas, Florida, or Phoenix — and we'll bring them home when the law changes.</p></details>
+  <details><summary>What if fares fall to 50 cents a mile?</summary><p>Then the business belongs to whoever has the cheapest parking and power. With a rented lot and Supercharging, a 30-car fleet loses money at $0.50. With a Clutch-owned depot, it still covers its loans at about 30% utilization. Move the depot slider in the calculator and watch the break-even fare change.</p></details>
+  <details><summary>How is Clutch financing this?</summary><p>Vehicles on a five-year equipment loan, roughly 17% down, plus a depot budget. Total equity for 30 cars is in the $400k–$450k range. We'll open part of that to outside investors under a proper offering once Tesla confirms terms.</p></details>
+  <details><summary>Is this a Tesla company?</summary><p>No. Clutch Cybercab is an independent fleet operator applying to run vehicles on Tesla's network. Tesla and Cybercab are trademarks of Tesla, Inc.</p></details>
+</div></section>
+
+<footer><div class="wrap">
+  <div>© 2026 Clutch Industries · Salem, Oregon · CCB #212444 · AZ ROC #365225</div>
+  <div><a href="https://www.clutchindustries.com">Clutch Industries</a><a href="https://www.clutchpropertymanagement.com">Clutch Property Management</a><a href="https://www.aplaceforvets.com">A Place for Vets</a></div>
+</div></footer>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const fmt=n=>{const a=Math.abs(n),s=n<0?"−":"";return a>=1e6?s+"$"+(a/1e6).toFixed(a>=1e7?0:1)+"M":s+"$"+Math.round(a/1000)+"k";};
+  const A={price:30000,down:.17,rate:.075,term:5,base:3,trip:5,empty:.4,speed:25,load:3,kwh:.25,fsd:199*12,ins:3500,tires:2800,tax:3100,clean:1700,fte:144000,ga:48000};
+  function unit(hrs,fare,take,own){
+    const tripMin=A.trip/A.speed*60+A.trip*A.empty/A.speed*60+A.load;
+    const trips=hrs*60/tripMin*365, miles=trips*A.trip*(1+A.empty);
+    const gross=trips*(A.base+fare*A.trip), net=gross*(1-take);
+    const park=own?600:6000, ckwh=own?.14:.35;
+    const opex=miles*A.kwh*ckwh+park+A.ins+A.tires+A.fsd+A.tax+(own?1200:A.clean);
+    const loan=A.price*(1-A.down), r=A.rate/12, n=A.term*12, debt=loan*r/(1-Math.pow(1+r,-n))*12;
+    return {gross,net,opex,debt,trips,cash:net-opex-debt};
+  }
+  function render(){
+    const cars=+$("cars").value, hrs=+$("util").value, fare=+$("fare").value, take=+$("take").value/100, own=$("depot").value==="1";
+    $("cars_o").textContent=cars; $("util_o").textContent=hrs.toFixed(1)+" h"; $("fare_o").textContent="$"+fare.toFixed(2); $("take_o").textContent=Math.round(take*100)+"%";
+    $("depot_o").textContent=own?"Yes — Clutch lot, own chargers":"No — rent parking, Supercharge";
+    const u=unit(hrs,fare,take,own), oh=A.fte+A.ga;
+    const fleet=u.cash*cars-oh, eq=cars*A.price*A.down+(own?450000:250000);
+    const be=((u.opex+u.debt+oh/cars)/(1-take)/u.trips-A.base)/A.trip;
+    $("o_fleet").textContent=fmt(fleet); $("o_fleet").style.color=fleet<0?"#7A1F18":"";
+    $("o_car").textContent=fmt(u.cash); $("o_eq").textContent=fmt(eq); $("o_rev").textContent=fmt(u.gross*cars);
+    $("o_be").textContent="$"+Math.max(be,0).toFixed(2);
+    $("o_bar").style.width=Math.max(0,Math.min(100,fleet/(cars*40000)*100))+"%";
+    document.querySelectorAll("#t-rent,#t-own").forEach(b=>b.classList.remove("on")); $(own?"t-own":"t-rent").classList.add("on");
+    levers(own);
+  }
+  function levers(own){
+    const rows=[["Parking per car / yr",6000,600,"$"],["Charging per kWh",0.35,0.14,"$"],["Cleaning per car / yr",1700,1200,"$"],["Break-even fare / mi",0.82,0.50,"$"]];
+    $("levers").innerHTML=rows.map(([l,a,b,p])=>{const v=own?b:a,pct=v/a*100;return `<div class="lever"><span>${l}</span><b>${p}${v.toLocaleString(undefined,{minimumFractionDigits:v<10?2:0,maximumFractionDigits:2})}</b><div class="track"><i style="width:${pct}%"></i><em style="left:${pct}%"></em></div></div>`}).join("");
+  }
+  ["cars","util","fare","take","depot"].forEach(id=>$(id).addEventListener("input",render));
+  $("t-rent").addEventListener("click",()=>{$("depot").value=0;render();});
+  $("t-own").addEventListener("click",()=>{$("depot").value=1;render();});
+  render();
+
+  // Waitlist form. Set FORM_ENDPOINT to a Formspree / Cloudflare Worker URL to collect submissions.
+  const FORM_ENDPOINT="";
+  $("form").addEventListener("submit",async e=>{
+    e.preventDefault();
+    const f=e.target; if(!f.name.value||!f.email.value){f.reportValidity();return;}
+    const data=Object.fromEntries(new FormData(f).entries()); data.role=[...f.querySelectorAll('input[name=role]:checked')].map(x=>x.value).join(", ");
+    if(FORM_ENDPOINT){try{await fetch(FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify(data)});}catch(err){}}
+    else{location.href="mailto:tierravista.oregon@gmail.com?subject="+encodeURIComponent("Clutch Cybercab waitlist — "+data.name)+"&body="+encodeURIComponent(Object.entries(data).map(([k,v])=>k+": "+v).join("\n"));}
+    $("msg").style.display="block"; f.querySelector("button").textContent="You're on the list";
+  });
+})();
+</script>
+</body>
+</html>
